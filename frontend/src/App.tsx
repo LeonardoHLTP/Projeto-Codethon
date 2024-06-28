@@ -11,7 +11,7 @@ export function App() {
     <>
       <ChakraProvider>
             <div className='h-[300dvh] w-full'>
-                <Nav list={[{href : "/", text: "Para empresas"}, {href : "/userLogin", text : "Login Usuário"}]} mainName={"Codethon"}/>
+                <Nav list={[{href : "/CadastroEmpresa", text: "Para empresas"}, {href : "/Login", text : "Login Usuário"}]} mainName={"Codethon"}/>
                 <div className='mt-8 p-4'>
                   <Outlet/>
                 </div>
