@@ -1,0 +1,47 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="creating-table-servico" author="carlos.junior">
+
+                <preConditions onFail="MARK_RAN" onFailMessage="A tabela servico ja existe">
+                    <not>
+                        <tableExists tableName="servico"/>
+                    </not>
+                </preConditions>
+
+                <createTable tableName="servico">
+
+                    <column name="id" type="bigint" autoIncrement="true" >
+                        <constraints nullable="false" />
+                    </column>
+
+                    <column name="empresa_id" type="bigint">
+                        <constraints nullable="false" />
+                    </column>
+
+                    <column name="descricao" type="${varchar_200}">
+                        <constraints nullable="false" />
+                    </column>
+
+                    <column name="tempo_atendimento" type="bigint">
+                        <constraints nullable="false" />
+                    </column>
+
+                </createTable>
+
+                <addForeignKeyConstraint
+                        baseColumnNames="empresa_id"
+                        baseTableName="servico"
+                        constraintName="fk_empresa_servico"
+                        referencedColumnNames="id"
+                        referencedTableName="empresa"/>
+
+                <addPrimaryKey
+                        columnNames="id"
+                        tableName="servico"
+                        constraintName="xpk_servico"/>
+        </changeSet>
+
+</databaseChangeLog>

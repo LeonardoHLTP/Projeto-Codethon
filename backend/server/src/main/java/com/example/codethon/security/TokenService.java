@@ -21,7 +21,7 @@ public class TokenService {
             try {
                 Algorithm hashing = Algorithm.HMAC256(secret);
                 return JWT.create()
-                        .withIssuer("genniuschat")
+                        .withIssuer("codethon")
                         .withSubject(user.getEmail())
                         .withExpiresAt(getExpirationDate())
                         .sign(hashing);

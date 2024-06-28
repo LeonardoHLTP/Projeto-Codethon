@@ -1,0 +1,54 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="creating-table-agendamento" author="carlos.junior">
+
+            <preConditions onFail="MARK_RAN" onFailMessage="A tabela agendamento ja existe">
+                <not>
+                    <tableExists tableName="agendamento"/>
+                </not>
+            </preConditions>
+
+            <createTable tableName="agendamento">
+
+                <column name="id" type="bigint" autoIncrement="true" >
+                    <constraints nullable="false" />
+                </column>
+
+                <column name="usuario_atendimento_id" type="bigint">
+                    <constraints nullable="false" />
+                </column>
+
+                <column name="empresa_id" type="bigint">
+                    <constraints nullable="false" />
+                </column>
+
+                <column name="horario_agendado" type="TIMESTAMP">
+                    <constraints nullable="false" />
+                </column>
+
+            </createTable>
+
+            <addForeignKeyConstraint
+                    baseColumnNames="usuario_atendimento_id"
+                    baseTableName="agendamento"
+                    constraintName="fk_usuario_atendimento"
+                    referencedColumnNames="id"
+                    referencedTableName="users"/>
+
+            <addForeignKeyConstraint
+                    baseColumnNames="empresa_id"
+                    baseTableName="agendamento"
+                    constraintName="fk_empresa"
+                    referencedColumnNames="id"
+                    referencedTableName="empresa"/>
+
+            <addPrimaryKey
+                    columnNames="id"
+                    tableName="agendamento"
+                    constraintName="xpkagendamento"/>
+    </changeSet>
+
+</databaseChangeLog>

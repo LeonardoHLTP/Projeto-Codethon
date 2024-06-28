@@ -2,7 +2,7 @@ package com.example.codethon.resource;
 
 import com.example.codethon.dto.user.UserLoginDTO;
 import com.example.codethon.dto.user.UserRegisterDTO;
-import com.example.codethon.service.AuthenticationService;
+import com.example.codethon.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class AuthenticationResource {
 
-    private final AuthenticationService authenticationService;
+    private final AuthService authService;
 
     @PostMapping("/login")
     public ResponseEntity<JSONObject> login(@RequestBody @Valid UserLoginDTO user)  {
-        return ResponseEntity.ok(authenticationService.login(user));
+        return ResponseEntity.ok(authService.login(user));
     }
 
     @PostMapping("/register")
     public ResponseEntity<JSONObject> register(@RequestBody @Valid UserRegisterDTO user) {
-        return ResponseEntity.ok(authenticationService.register(user));
+        return ResponseEntity.ok(authService.register(user));
     }
 
 }
