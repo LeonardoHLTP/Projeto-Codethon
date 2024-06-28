@@ -1,0 +1,42 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="creating-table-user---" author="CGaffo">
+
+        <preConditions onFail="MARK_RAN" onFailMessage="A tabela user ja existe">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="users">
+
+            <column name="id" type="bigint" autoIncrement="true" >
+                <constraints nullable="false" />
+            </column>
+
+            <column name="nome" type="${varchar_200}"/>
+
+            <column name="email" type="${varchar_200}"/>
+
+            <column name="senha" type="${varchar_255}"/>
+
+            <column name="ativo" type="BOOLEAN"/>
+
+            <column name="empresa" type="BOOLEAN"/>
+
+        </createTable>
+
+        <addUniqueConstraint
+                tableName="users"
+                columnNames="email" />
+
+        <addPrimaryKey
+                columnNames="id"
+                tableName="users"
+                constraintName="xpkusers"/>
+    </changeSet>
+
+</databaseChangeLog>
