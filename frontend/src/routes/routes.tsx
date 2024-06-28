@@ -3,6 +3,7 @@ import { App } from "../App"
 import { Login } from "../pages/Login"
 import { CadastroEmpresa } from "../pages/Empresa/CadastroEmpresa"
 import { CadastroUsuario } from "../pages/Usuario/CadastroUser"
+import { CadastroProduto } from "../pages/Empresa/CadastroProdutos"
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ export const router = createBrowserRouter([
   { 
     path : "/CadastroEmpresa",
     element :  <CadastroEmpresa/>,
+    errorElement : <h1> Error :( </h1>
+  },
+  { 
+    path : "/CadastroProduto",
+    element :  <CadastroProduto/>,
     errorElement : <h1> Error :( </h1>
   }
 ])
