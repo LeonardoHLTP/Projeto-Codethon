@@ -3,9 +3,7 @@ import PrivateRoutes from "./PrivateRoutes"
 import PublicRoutes from "./PublicRoutes"
 import { RouterProvider } from "react-router-dom";
 
-export const AppRoutes = () => { 
-
-
+export const AppRoutes = () => {
 
 const parseJwt = (token: string) => {
   try {
@@ -34,7 +32,8 @@ const checkAuth = () => {
 
 
   const router = createBrowserRouter([
-  checkAuth() ? PrivateRoutes() : {} , PublicRoutes(),])
+  checkAuth() ? PrivateRoutes() : {} , ...PublicRoutes()
+  ])
 
 
   return <RouterProvider router={router} />
