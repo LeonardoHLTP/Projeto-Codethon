@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, Heading, Text, Stack, Box, StackDivider,Link, FormControl, FormLabel, Input, Button, FormHelperText } from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Heading, Text ,Link, FormControl, FormLabel, Input, Button, FormHelperText } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 interface LoginData {

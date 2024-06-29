@@ -3,6 +3,8 @@ import { App } from "../App"
 import { Login } from "../pages/Login"
 import { CadastroEmpresa } from "../pages/Empresa/CadastroEmpresa"
 import { CadastroUsuario } from "../pages/Usuario/CadastroUser"
+import { VisualizarAgedamentos } from "../pages/Empresa/VisualizarAgendamentos"
+
 
 export const router = createBrowserRouter([
   {
@@ -24,5 +26,10 @@ export const router = createBrowserRouter([
     path : "/CadastroEmpresa",
     element :  <CadastroEmpresa/>,
     errorElement : <h1> Error :( </h1>
+  },
+  {
+    path : "/EmpresaVisualizar",
+    element : <VisualizarAgedamentos/>,
+    errorElement: <h1>Error :( </h1>
   }
 ])

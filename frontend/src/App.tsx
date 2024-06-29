@@ -1,7 +1,6 @@
 import { ChakraProvider} from '@chakra-ui/react'
 import { Nav } from './components/nav'
 import './App.css'
-import { Outlet } from 'react-router-dom'
 
 
 
