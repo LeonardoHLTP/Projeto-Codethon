@@ -35,16 +35,7 @@ export function Login() {
     passwordError : loginData.senha.length < 5
   }
 
-    const login = () => {
-        AuthService.login(loginData)
-            .then((response) => {
-                localStorage.setItem("token", response.data.token);
-                //redirecionar para rota logada
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
+
 
   useEffect(()=>{
   },[touchedFields])
@@ -78,7 +69,7 @@ export function Login() {
                 </FormControl>
                 <hr className="my-3"/>
                 <div className="flex gap-2">
-                  <Button onClick={login}>Enviar</Button>
+                  
                   <Button onClick={()=>setLoginData(loginDataInitialState)}>Limpar</Button>
                 </div>
                 <CardHeader>

@@ -1,0 +1,28 @@
+/* Estilos para a página DetalhesAgendamento */
+.detalhes-agendamento {
+    padding: 16px;
+    background: linear-gradient(to right, #B4FF00, #A68A64); /* Fundo degradê linear */
+    min-height: 100vh; /* Garante que o fundo cubra toda a altura da tela */
+    color: #A68A64;
+}
+
+.detalhes-agendamento h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+.detalhes-agendamento p {
+    margin-bottom: 16px;
+    color: #A68A64;
+}
+
+/* Responsividade para smartphones */
+@media (max-width: 600px) {
+    .detalhes-agendamento h1 {
+        font-size: 1.5rem;
+    }
+
+    .detalhes-agendamento p {
+        font-size: 1rem;
+    }
+}
