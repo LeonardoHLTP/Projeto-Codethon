@@ -28,7 +28,7 @@ export function CardAgendamento( agendamento : Agendamento ){
   )
 }
 
-const VisualizarAgedamentos = () => {
+const VisualizarAgedamentosEmpresa = () => {
   return (
     <div className="h-screen bg-slate-200">
       <Nav list={[{href : "/EmpresaVisualizar", text: "Agendamentos da Empresa"}, {href : "/CadastroEmpresa", text : "Cadastro de Empresa"}, {href: "/Agendamentos", text: "Agendamentos"}]} mainName={"Codethon"}/>
@@ -45,4 +45,4 @@ const VisualizarAgedamentos = () => {
   )
 }
 
-export default VisualizarAgedamentos
+export default VisualizarAgedamentosEmpresa

@@ -1,5 +1,5 @@
 import { CadastroEmpresa } from "../pages/Empresa/CadastroEmpresa"
-import VisualizarAgedamentos from "../pages/Empresa/VisualizarAgendamentos"
+import VisualizarAgedamentosEmpresa from "../pages/Empresa/VisualizarAgendamentos"
 import DetalhesAgendamento from "../pages/DetalhesAgendamento.tsx";
 import VisualizarAgendamentos from "../pages/VisualizarAgendamento.tsx";
 
@@ -13,7 +13,7 @@ export default function PrivateRoutes() {
            },
            {
                path : "/EmpresaVisualizar",
-               element :  <VisualizarAgedamentos/>,
+               element :  <VisualizarAgedamentosEmpresa/>,
                errorElement: <h1>Error :( </h1>
            },
            {
