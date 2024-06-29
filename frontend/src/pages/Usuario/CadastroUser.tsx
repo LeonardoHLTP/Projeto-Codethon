@@ -1,6 +1,6 @@
-// enviar no dtto flag empresa = "true"
 import { Card, CardBody, CardHeader, Heading, FormControl, FormLabel, Input, Button, FormHelperText } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import * as AuthService from "../../service/AuthService";
 
 interface LoginData {
   nome: string;
@@ -8,7 +8,7 @@ interface LoginData {
   senha: string;
 }
 
-interface LoginDataErrors { 
+interface LoginDataErrors {
   nomeError : boolean,
   emailError : boolean,
   passwordError : boolean,
@@ -25,7 +25,7 @@ export function CadastroUsuario() {
   const loginDataInitialState : LoginData = { nome: "", email: "", senha: "" }
   const [touchedFields, setTouchedFields] = useState<TouchedFields>({ nome: false, email: false, password: false });
   const [loginData, setLoginData] = useState<LoginData>(loginDataInitialState);
-  function handleChange(e : React.ChangeEvent<HTMLInputElement> , name : keyof LoginData) : void { 
+  function handleChange(e : React.ChangeEvent<HTMLInputElement> , name : keyof LoginData) : void {
     setLoginData({...loginData, [name] : e.target.value})
     setTouchedFields({ ...touchedFields, [name]: true });
   }
@@ -33,6 +33,16 @@ export function CadastroUsuario() {
     nomeError : loginData.nome.length < 6 || /^\d+$/.test(loginData.nome) || !isNaN(Number(loginData.nome[0])),
     emailError : loginData.email.length < 5 || !loginData.email.includes("@") || !loginData.email.includes("."),
     passwordError : loginData.senha.length < 5
+  }
+
+  const register = () => {
+    AuthService.register(loginData)
+        .then(() => {
+            //redirecinar para area logada
+        })
+        .catch((error) => {
+            console.log(error);
+        })
   }
 
   useEffect(()=>{
@@ -67,13 +77,13 @@ export function CadastroUsuario() {
                 </FormControl>
                 <hr className="my-3"/>
                 <div className="flex gap-2">
-                  <Button>Enviar</Button>
+                  <Button onClick={register}>Enviar</Button>
                   <Button onClick={()=>setLoginData(loginDataInitialState)}>Limpar</Button>
                 </div>
-                
+
             </CardBody>
         </Card>
     </div>
-    
+
   )
 }

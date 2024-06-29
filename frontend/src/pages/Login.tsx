@@ -1,5 +1,6 @@
-import { Card, CardBody, CardHeader, Heading, Text, Stack, Box, StackDivider,Link, FormControl, FormLabel, Input, Button, FormHelperText } from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Heading, Text,Link, FormControl, FormLabel, Input, Button, FormHelperText } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import * as AuthService from "../service/AuthService.ts";
 
 interface LoginData {
   nome: string;
@@ -7,7 +8,7 @@ interface LoginData {
   senha: string;
 }
 
-interface LoginDataErrors { 
+interface LoginDataErrors {
   nomeError : boolean,
   emailError : boolean,
   passwordError : boolean,
@@ -24,7 +25,7 @@ export function Login() {
   const loginDataInitialState : LoginData = { nome: "", email: "", senha: "" }
   const [touchedFields, setTouchedFields] = useState<TouchedFields>({ nome: false, email: false, password: false });
   const [loginData, setLoginData] = useState<LoginData>(loginDataInitialState);
-  function handleChange(e : React.ChangeEvent<HTMLInputElement> , name : keyof LoginData) : void { 
+  function handleChange(e : React.ChangeEvent<HTMLInputElement> , name : keyof LoginData) : void {
     setLoginData({...loginData, [name] : e.target.value})
     setTouchedFields({ ...touchedFields, [name]: true });
   }
@@ -33,6 +34,17 @@ export function Login() {
     emailError : loginData.email.length < 5 || !loginData.email.includes("@") || !loginData.email.includes("."),
     passwordError : loginData.senha.length < 5
   }
+
+    const login = () => {
+        AuthService.login(loginData)
+            .then((response) => {
+                localStorage.setItem("token", response.data.token);
+                //redirecionar para rota logada
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
   useEffect(()=>{
   },[touchedFields])
@@ -43,11 +55,11 @@ export function Login() {
               <Heading>Login </Heading>
             </CardHeader>
             <CardBody>
-                <FormControl isRequired isInvalid={dataErrors.nomeError && touchedFields.nome}>
-                  <FormLabel>Nome:</FormLabel>
-                  <Input onChange={e=>handleChange(e, "nome")} value={loginData.nome} type="text"/>
-                  {dataErrors.nomeError &&
-                    <FormHelperText> Nome invalido. </FormHelperText>
+                <FormControl isRequired isInvalid={dataErrors.emailError && touchedFields.email}>
+                  <FormLabel>Email:</FormLabel>
+                  <Input onChange={e=>handleChange(e, "email")} value={loginData.email} type="text"/>
+                  {dataErrors.emailError &&
+                    <FormHelperText> Email invalido. </FormHelperText>
                   }
                 </FormControl>
                 {/* <FormControl isRequired isInvalid={dataErrors.emailError && touchedFields.email}>
@@ -66,7 +78,7 @@ export function Login() {
                 </FormControl>
                 <hr className="my-3"/>
                 <div className="flex gap-2">
-                  <Button>Enviar</Button>
+                  <Button onClick={login}>Enviar</Button>
                   <Button onClick={()=>setLoginData(loginDataInitialState)}>Limpar</Button>
                 </div>
                 <CardHeader>
@@ -75,6 +87,6 @@ export function Login() {
             </CardBody>
         </Card>
     </div>
-    
+
   )
 }
