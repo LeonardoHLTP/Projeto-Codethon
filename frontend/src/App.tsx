@@ -15,10 +15,19 @@ export function App() {
             [
               { href: "/CadastroEmpresa", text: "Para empresas" },
               { href: "/Login", text: "Login Usuário" },
+<<<<<<< Updated upstream
               { href: '/VisualizarAgendamentos', text: 'Visualizar Agendamentos' },
               ]
               } mainName={"Codethon"} />
 
+=======
+              //{ href: '/VisualizarAgendamentos', text: 'Visualizar Agendamentos' },
+            ]
+          } mainName={"Codethon"} />
+        </div>
+        <div className='mt-8 p-4'>
+          <Outlet />
+>>>>>>> Stashed changes
         </div>
 
       </ChakraProvider>

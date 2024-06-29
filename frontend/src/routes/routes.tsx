@@ -3,8 +3,13 @@ import { App } from "../App"
 import { Login } from "../pages/Login"
 import { CadastroEmpresa } from "../pages/Empresa/CadastroEmpresa"
 import { CadastroUsuario } from "../pages/Usuario/CadastroUser"
+<<<<<<< Updated upstream
 import { CadastroProduto } from "../pages/Empresa/CadastroProdutos"
 import { VisualizarAgendamentos } from "../pages/Usuario/VisualizarAgendamentos";
+=======
+import { VisualizarAgendamentos } from "../pages/Usuario/VisualizarAgendamentos";
+import { DetalhesAgendamento } from "../pages/Usuario/DetalhesAgendamento";
+>>>>>>> Stashed changes
 
 export const router = createBrowserRouter([
   {
@@ -36,5 +41,10 @@ export const router = createBrowserRouter([
     path: 'VisualizarAgendamentos',
     element: <VisualizarAgendamentos />,
     errorElement: <h1> Error :( </h1>
+  },
+  {
+    path: '/DetalhesAgendamento/:id',
+    element: <DetalhesAgendamento />,
+    errorElement : <h1> Error :( </h1>
   },
 ])

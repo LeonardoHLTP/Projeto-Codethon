@@ -1,0 +1,83 @@
+/* Estilos para a página VisualizarAgendamentos */
+.visualizar-agendamentos {
+    padding: 16px;
+    background: linear-gradient(to bottom, #B4FF00, #A68A64);
+    min-height: 100vh;
+}
+
+.visualizar-agendamentos h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: #A68A64;
+
+}
+
+.visualizar-agendamentos p {
+    margin-bottom: 16px;
+    color: #A68A64;
+}
+
+.visualizar-agendamentos table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.visualizar-agendamentos th, .visualizar-agendamentos td {
+    padding: 8px;
+    border: 1px solid #A68A64;
+}
+
+.visualizar-agendamentos th {
+    background-color: #A68A64;
+    color: white;
+}
+
+.visualizar-agendamentos td {
+    background-color: #f0f8ff;
+    color: black;
+}
+
+/* Responsividade para smartphones */
+@media (max-width: 600px) {
+    .visualizar-agendamentos h1 {
+        font-size: 1.5rem;
+    }
+
+    .visualizar-agendamentos p {
+        font-size: 1rem;
+    }
+
+    .visualizar-agendamentos table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .visualizar-agendamentos th, .visualizar-agendamentos td {
+        display: inline;
+        width: 100%;
+    }
+
+    .visualizar-agendamentos th, .visualizar-agendamentos td {
+        padding: 10px;
+    }
+
+    .visualizar-agendamentos th {
+        background-color: #A68A64;
+        color: white;
+    }
+
+    .visualizar-agendamentos td {
+        background-color: #ffff;
+        color: black;
+    }
+
+    .visualizar-agendamentos .actions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .visualizar-agendamentos .actions button {
+        margin: 8px;
+    }
+}
