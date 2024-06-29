@@ -8,7 +8,7 @@ interface LoginData {
   senha: string;
 }
 
-interface LoginDataErrors { 
+interface LoginDataErrors {
   nomeError : boolean,
   emailError : boolean,
   passwordError : boolean,
@@ -20,12 +20,11 @@ interface TouchedFields {
   password: boolean;
 }
 
-
 export function CadastroEmpresa() {
   const loginDataInitialState : LoginData = { nome: "", email: "", senha: "" }
   const [touchedFields, setTouchedFields] = useState<TouchedFields>({ nome: false, email: false, password: false });
   const [loginData, setLoginData] = useState<LoginData>(loginDataInitialState);
-  function handleChange(e : React.ChangeEvent<HTMLInputElement> , name : keyof LoginData) : void { 
+  function handleChange(e : React.ChangeEvent<HTMLInputElement> , name : keyof LoginData) : void {
     setLoginData({...loginData, [name] : e.target.value})
     setTouchedFields({ ...touchedFields, [name]: true });
   }
@@ -70,10 +69,10 @@ export function CadastroEmpresa() {
                   <Button>Enviar</Button>
                   <Button onClick={()=>setLoginData(loginDataInitialState)}>Limpar</Button>
                 </div>
-                
+
             </CardBody>
         </Card>
     </div>
-    
+
   )
 }

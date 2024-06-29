@@ -1,12 +1,14 @@
 import { Card, CardBody, CardFooter, CardHeader, Heading, Text } from "@chakra-ui/react";
 import { Agendamento } from "../../types/User";
 import agendamentos from "../../AgentamentosTeste";
+import {Nav} from "../../components/nav.tsx";
+import React from "react";
 
 
-export function CardAgendamento( agendamento : Agendamento ){ 
+export function CardAgendamento( agendamento : Agendamento ){
   // usuario : id
   const value : string = agendamento.tipoAgendamento.valor.toLocaleString('pt-BR', {
-    style: 'currency', 
+    style: 'currency',
     currency: 'BRL',
 });
   return (
@@ -26,9 +28,10 @@ export function CardAgendamento( agendamento : Agendamento ){
   )
 }
 
-const VisualizarAgedamentos = () => { 
-  return ( 
+const VisualizarAgedamentos = () => {
+  return (
     <div className="h-screen bg-slate-200">
+      <Nav list={[{href : "/EmpresaVisualizar", text: "Agendamentos da Empresa"}, {href : "/CadastroEmpresa", text : "Cadastro de Empresa"}, {href: "/Agendamentos", text: "Agendamentos"}]} mainName={"Codethon"}/>
       <div className="h-screen scale-95 bg-slate-50 rounded p-5">
         <Heading>Agendamentos Marcados</Heading>
         <div className="h-[90%] grid grid-cols-1 md:grid-cols-5 sm:grid-cols-3 overflow-x-hidden overflow-y-auto gap-4">

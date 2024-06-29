@@ -21,12 +21,12 @@ public class AuthenticationResource {
 
     @PostMapping("/login")
     public ResponseEntity<JSONObject> login(@RequestBody @Valid UserLoginDTO user)  {
-        return ResponseEntity.ok(authService.login(user));
+        return authService.login(user);
     }
 
     @PostMapping("/register")
     public ResponseEntity<JSONObject> register(@RequestBody @Valid UserRegisterDTO user) {
-        return ResponseEntity.ok(authService.register(user));
+        return authService.register(user);
     }
 
 }

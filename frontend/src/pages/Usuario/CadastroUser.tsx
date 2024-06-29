@@ -1,6 +1,7 @@
 import { Card, CardBody, CardHeader, Heading, FormControl, FormLabel, Input, Button, FormHelperText } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import * as AuthService from "../../service/AuthService";
+import {useNavigate} from "react-router-dom";
 
 interface LoginData {
   nome: string;
@@ -20,7 +21,6 @@ interface TouchedFields {
   password: boolean;
 }
 
-
 export function CadastroUsuario() {
   const loginDataInitialState : LoginData = { nome: "", email: "", senha: "" }
   const [touchedFields, setTouchedFields] = useState<TouchedFields>({ nome: false, email: false, password: false });
@@ -35,10 +35,12 @@ export function CadastroUsuario() {
     passwordError : loginData.senha.length < 5
   }
 
+  const navigate = useNavigate();
+
   const register = () => {
     AuthService.register(loginData)
         .then(() => {
-            //redirecinar para area logada
+            navigate("/Agendamentos")
         })
         .catch((error) => {
             console.log(error);

@@ -1,6 +1,7 @@
 import { Card, CardBody, CardHeader, Heading, Text,Link, FormControl, FormLabel, Input, Button, FormHelperText } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import * as AuthService from "../service/AuthService.ts";
+import {useNavigate} from "react-router-dom";
 
 interface LoginData {
   nome: string;
@@ -29,6 +30,9 @@ const Login = () => {
     setLoginData({...loginData, [name] : e.target.value})
     setTouchedFields({ ...touchedFields, [name]: true });
   }
+
+  const navigate  = useNavigate();
+
   const dataErrors : LoginDataErrors = {
     nomeError : loginData.nome.length < 6 || /^\d+$/.test(loginData.nome) || !isNaN(Number(loginData.nome[0])),
     emailError : loginData.email.length < 5 || !loginData.email.includes("@") || !loginData.email.includes("."),
@@ -39,12 +43,18 @@ const Login = () => {
         AuthService.login(loginData)
             .then((response) => {
                 localStorage.setItem("token", response.data.token);
-                //redirecionar para rota logada
+                navigate("/Agendamentos")
             })
             .catch((error) => {
                 console.log(error);
             })
     }
+
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            navigate("/Agendamentos")
+        }
+    }, []);
 
   useEffect(()=>{
   },[touchedFields])

@@ -3,10 +3,13 @@ package com.example.codethon.service;
 import com.example.codethon.domain.User;
 import com.example.codethon.dto.user.UserLoginDTO;
 import com.example.codethon.dto.user.UserRegisterDTO;
+import com.example.codethon.exception.ValidationException;
 import com.example.codethon.repository.UserRepository;
 import com.example.codethon.security.TokenService;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,11 +27,11 @@ public class AuthService {
 
     private static final String MESSAGE = "message";
 
-    public JSONObject login(UserLoginDTO user) {
+    public ResponseEntity<JSONObject> login(UserLoginDTO user) {
         try {
 
             var existedUser = (User) userRepository.findByEmail(user.getEmail());
-            if (!existedUser.getAtivo()) return new JSONObject().appendField(MESSAGE, "Not Activated");
+            if (!existedUser.getAtivo()) return ResponseEntity.ok(new JSONObject().appendField(MESSAGE, "Not Activated"));
 
             var userAuth = new UsernamePasswordAuthenticationToken
                     (user.getEmail(), user.getSenha());
@@ -38,17 +41,17 @@ public class AuthService {
 
             var token = tokenService.generateToken((User) auth.getPrincipal());
 
-            return new JSONObject().appendField("token", token);
+            return ResponseEntity.ok(new JSONObject().appendField("token", token));
 
         } catch (Exception e) {
-            return new JSONObject().appendField(MESSAGE, "Invalid credentials");
+            throw new ValidationException(e.getMessage());
         }
     }
 
-    public JSONObject register(UserRegisterDTO user) {
+    public ResponseEntity<JSONObject> register(UserRegisterDTO user) {
         try {
             if (userRepository.findByEmail(user.getEmail()) != null)
-                return new JSONObject().appendField(MESSAGE, "User already registered");
+                throw new ValidationException("Usuario já cadastrado");
 
             String encryptedPassword = new BCryptPasswordEncoder().encode(user.getSenha());
 
@@ -59,10 +62,10 @@ public class AuthService {
                             encryptedPassword
                     ));
 
-            return new JSONObject().appendField(MESSAGE, "User registered successfully");
+            return ResponseEntity.ok(new JSONObject().appendField(MESSAGE, "User registered successfully"));
 
         } catch (Exception e) {
-            return new JSONObject().appendField(MESSAGE, "Error registering user, " + e.getMessage());
+            throw new ValidationException(e.getMessage());
         }
     }
 }

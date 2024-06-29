@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "agendamento", schema = "public")
@@ -30,5 +30,7 @@ public class Agendamento implements Serializable {
     @OneToOne
     private Empresa empresa;
 
-    private LocalDateTime horarioAgendado;
+    private LocalDate dataAgendamento;
+
+    private String horarioAgendado;
 }
