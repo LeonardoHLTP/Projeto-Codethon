@@ -26,7 +26,7 @@ export function CardAgendamento( agendamento : Agendamento ){
   )
 }
 
-export function VisualizarAgedamentos() { 
+const VisualizarAgedamentos = () => { 
   return ( 
     <div className="h-screen bg-slate-200">
       <div className="h-screen scale-95 bg-slate-50 rounded p-5">
@@ -41,3 +41,5 @@ export function VisualizarAgedamentos() {
     </div>
   )
 }
+
+export default VisualizarAgedamentos

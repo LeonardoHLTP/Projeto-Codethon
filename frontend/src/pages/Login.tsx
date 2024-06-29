@@ -20,7 +20,7 @@ interface TouchedFields {
 }
 
 
-export function Login() {
+const Login = () => {
   const loginDataInitialState : LoginData = { nome: "", email: "", senha: "" }
   const [touchedFields, setTouchedFields] = useState<TouchedFields>({ nome: false, email: false, password: false });
   const [loginData, setLoginData] = useState<LoginData>(loginDataInitialState);
@@ -78,3 +78,5 @@ export function Login() {
     
   )
 }
+
+export default Login

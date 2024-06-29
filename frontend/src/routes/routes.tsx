@@ -1,35 +1,42 @@
 import { createBrowserRouter } from "react-router-dom"
-import { App } from "../App"
-import { Login } from "../pages/Login"
-import { CadastroEmpresa } from "../pages/Empresa/CadastroEmpresa"
-import { CadastroUsuario } from "../pages/Usuario/CadastroUser"
-import { VisualizarAgedamentos } from "../pages/Empresa/VisualizarAgendamentos"
+import PrivateRoutes from "./PrivateRoutes"
+import PublicRoutes from "./PublicRoutes"
+import { RouterProvider } from "react-router-dom";
+
+export const AppRoutes = () => { 
 
 
-export const router = createBrowserRouter([
-  {
-    path : "/",
-    element : <App />,
-    errorElement: <h1>Error :( </h1>,
-  },
-  {
-    path: "/Login",
-    element : <Login/>,
-    errorElement: <h1>Error :( </h1>,
-  },
-  {
-    path : "/CadastroUsuario",
-    element :<CadastroUsuario/>,
-    errorElement: <h1>Error :( </h1>,
-  }, 
-  { 
-    path : "/CadastroEmpresa",
-    element :  <CadastroEmpresa/>,
-    errorElement : <h1> Error :( </h1>
-  },
-  {
-    path : "/EmpresaVisualizar",
-    element : <VisualizarAgedamentos/>,
-    errorElement: <h1>Error :( </h1>
+
+const parseJwt = (token: string) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
   }
-])
+};
+
+const checkAuth = () => {
+  const token = localStorage.getItem('token')
+  if (token){
+    const decodedJwt = parseJwt(token);
+
+    if (decodedJwt.exp * 1000 < Date.now()) {
+      localStorage.removeItem('token');
+      console.log(false, "Token Existe, mas Expirado")
+      return false;
+    }
+    console.log(true, "Token valido")
+    return true;
+  }
+  console.log(false, "Token nao existe")
+  return false;
+}
+
+
+  const router = createBrowserRouter([
+  checkAuth() ? PrivateRoutes() : {} , PublicRoutes(),])
+
+
+  return <RouterProvider router={router} />
+
+}
